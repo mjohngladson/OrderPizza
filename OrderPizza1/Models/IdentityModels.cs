@@ -25,6 +25,8 @@ namespace OrderPizza1.Models
         {
         }
 
+        public DbSet<Pizza> Pizzas { get; set; }
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
