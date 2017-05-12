@@ -7,13 +7,13 @@ namespace OrderPizza1.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class initial : IMigrationMetadata
+    public sealed partial class seedPizzaAttributes : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(initial));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(seedPizzaAttributes));
         
         string IMigrationMetadata.Id
         {
-            get { return "201705121427233_initial"; }
+            get { return "201705121928444_seedPizzaAttributes"; }
         }
         
         string IMigrationMetadata.Source

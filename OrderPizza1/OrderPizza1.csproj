@@ -205,26 +205,24 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201705121427233_initial.cs" />
-    <Compile Include="Migrations\201705121427233_initial.Designer.cs">
-      <DependentUpon>201705121427233_initial.cs</DependentUpon>
+    <Compile Include="Migrations\201705121927470_initial.cs" />
+    <Compile Include="Migrations\201705121927470_initial.Designer.cs">
+      <DependentUpon>201705121927470_initial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201705121442111_addEntityPizza.cs" />
-    <Compile Include="Migrations\201705121442111_addEntityPizza.Designer.cs">
-      <DependentUpon>201705121442111_addEntityPizza.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705121443125_seeddata.cs" />
-    <Compile Include="Migrations\201705121443125_seeddata.Designer.cs">
-      <DependentUpon>201705121443125_seeddata.cs</DependentUpon>
+    <Compile Include="Migrations\201705121928444_seedPizzaAttributes.cs" />
+    <Compile Include="Migrations\201705121928444_seedPizzaAttributes.Designer.cs">
+      <DependentUpon>201705121928444_seedPizzaAttributes.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Pizza.cs" />
+    <Compile Include="Models\PizzaAttributes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Utilities\Constants.cs" />
+    <Compile Include="ViewModel\PizzaPizzaAttributesViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -304,14 +302,11 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201705121427233_initial.resx">
-      <DependentUpon>201705121427233_initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201705121927470_initial.resx">
+      <DependentUpon>201705121927470_initial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705121442111_addEntityPizza.resx">
-      <DependentUpon>201705121442111_addEntityPizza.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705121443125_seeddata.resx">
-      <DependentUpon>201705121443125_seeddata.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201705121928444_seedPizzaAttributes.resx">
+      <DependentUpon>201705121928444_seedPizzaAttributes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
