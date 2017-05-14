@@ -38,7 +38,8 @@ namespace OrderPizza1.Controllers
                 PizzaSizes = _context.PizzaAttributes.Where(x => x.Name == "Size"),
                 PizzaCrusts = _context.PizzaAttributes.Where(x => x.Name == "Crust"),
                 PizzaToppings = _context.PizzaAttributes.Where(x => x.Name == "Topping"),
-                SelectedToppings = _context.PizzaAttributes.Where(x => x.Name == "Topping").Select(y => y.IsSelected)
+                SelectedToppings = _context.PizzaAttributes.Where(x => x.Name == "Topping").Select(y => y.IsSelected),
+                Customer = new Customer()
             };
             return View(model);
         }

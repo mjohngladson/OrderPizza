@@ -17,5 +17,6 @@ namespace OrderPizza1.ViewModel
         [Display(Name = "Topping")]
         public IEnumerable<PizzaAttribute> PizzaToppings { get; set; }
         public IEnumerable<bool> SelectedToppings { get; set; }
+        public Customer Customer { get; set; }
     }
 }

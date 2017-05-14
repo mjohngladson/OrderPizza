@@ -213,8 +213,17 @@
     <Compile Include="Migrations\201705121928444_seedPizzaAttributes.Designer.cs">
       <DependentUpon>201705121928444_seedPizzaAttributes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705141025510_addCustomerEntity.cs" />
+    <Compile Include="Migrations\201705141025510_addCustomerEntity.Designer.cs">
+      <DependentUpon>201705141025510_addCustomerEntity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705141030431_addCustomerEntity1.cs" />
+    <Compile Include="Migrations\201705141030431_addCustomerEntity1.Designer.cs">
+      <DependentUpon>201705141030431_addCustomerEntity1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Pizza.cs" />
@@ -307,6 +316,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705121928444_seedPizzaAttributes.resx">
       <DependentUpon>201705121928444_seedPizzaAttributes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705141025510_addCustomerEntity.resx">
+      <DependentUpon>201705141025510_addCustomerEntity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705141030431_addCustomerEntity1.resx">
+      <DependentUpon>201705141030431_addCustomerEntity1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
