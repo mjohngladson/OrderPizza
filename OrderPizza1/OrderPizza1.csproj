@@ -18,7 +18,7 @@
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort />
+    <IISExpressSSLPort>44383</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -205,21 +205,17 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201705121927470_initial.cs" />
-    <Compile Include="Migrations\201705121927470_initial.Designer.cs">
-      <DependentUpon>201705121927470_initial.cs</DependentUpon>
+    <Compile Include="Migrations\201705151325025_initial.cs" />
+    <Compile Include="Migrations\201705151325025_initial.Designer.cs">
+      <DependentUpon>201705151325025_initial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201705121928444_seedPizzaAttributes.cs" />
-    <Compile Include="Migrations\201705121928444_seedPizzaAttributes.Designer.cs">
-      <DependentUpon>201705121928444_seedPizzaAttributes.cs</DependentUpon>
+    <Compile Include="Migrations\201705151326481_seedPizzaAttributes.cs" />
+    <Compile Include="Migrations\201705151326481_seedPizzaAttributes.Designer.cs">
+      <DependentUpon>201705151326481_seedPizzaAttributes.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201705141025510_addCustomerEntity.cs" />
-    <Compile Include="Migrations\201705141025510_addCustomerEntity.Designer.cs">
-      <DependentUpon>201705141025510_addCustomerEntity.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705141030431_addCustomerEntity1.cs" />
-    <Compile Include="Migrations\201705141030431_addCustomerEntity1.Designer.cs">
-      <DependentUpon>201705141030431_addCustomerEntity1.cs</DependentUpon>
+    <Compile Include="Migrations\201705151334545_seedRoleUserData.cs" />
+    <Compile Include="Migrations\201705151334545_seedRoleUserData.Designer.cs">
+      <DependentUpon>201705151334545_seedRoleUserData.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -246,6 +242,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\FB.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -256,6 +253,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="testExtLoginPage.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -311,17 +309,14 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201705121927470_initial.resx">
-      <DependentUpon>201705121927470_initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201705151325025_initial.resx">
+      <DependentUpon>201705151325025_initial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705121928444_seedPizzaAttributes.resx">
-      <DependentUpon>201705121928444_seedPizzaAttributes.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201705151326481_seedPizzaAttributes.resx">
+      <DependentUpon>201705151326481_seedPizzaAttributes.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705141025510_addCustomerEntity.resx">
-      <DependentUpon>201705141025510_addCustomerEntity.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705141030431_addCustomerEntity1.resx">
-      <DependentUpon>201705141030431_addCustomerEntity1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201705151334545_seedRoleUserData.resx">
+      <DependentUpon>201705151334545_seedRoleUserData.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
@@ -342,7 +337,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>63990</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:63990/</IISUrl>
+          <IISUrl>https://localhost:44383/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

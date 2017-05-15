@@ -54,9 +54,9 @@ namespace OrderPizza1
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+               appId: "117421922092991",
+               appSecret: "7e4bbeaae4f457351507ac686d1fc213");
 
             //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             //{

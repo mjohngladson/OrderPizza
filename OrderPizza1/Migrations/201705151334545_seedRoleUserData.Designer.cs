@@ -7,13 +7,13 @@ namespace OrderPizza1.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class addCustomerEntity : IMigrationMetadata
+    public sealed partial class seedRoleUserData : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(addCustomerEntity));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(seedRoleUserData));
         
         string IMigrationMetadata.Id
         {
-            get { return "201705141025510_addCustomerEntity"; }
+            get { return "201705151334545_seedRoleUserData"; }
         }
         
         string IMigrationMetadata.Source

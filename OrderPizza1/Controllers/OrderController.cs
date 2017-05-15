@@ -15,24 +15,11 @@ namespace OrderPizza1.Controllers
         {
             _context = new ApplicationDbContext();
         }
+
+        [Authorize(Roles = "CanOrderPizza")]
         // GET: Order
         public ActionResult Index()
         {
-            //var pizzaSizes = new List<SelectListItem>();
-            //foreach (var size in _context.PizzaAttributes.Where(x => x.Name == "Size"))
-            //{
-            //    pizzaSizes.Add(new SelectListItem() { Value = size.Id.ToString(), Text = size.Value });
-            //}
-            //var pizzaCrusts = new List<SelectListItem>();
-            //foreach (var crust in _context.PizzaAttributes.Where(x => x.Name == "Crust"))
-            //{
-            //    pizzaCrusts.Add(new SelectListItem() { Value = crust.Id.ToString(), Text = crust.Value });
-            //}
-            //var pizzaToppings = new List<SelectListItem>();
-            //foreach (var topping in _context.PizzaAttributes.Where(x => x.Name == "Topping"))
-            //{
-            //    pizzaToppings.Add(new SelectListItem() { Value = topping.Id.ToString(), Text = topping.Value });
-            //}
             var model = new PizzaPizzaAttributesViewModel
             {
                 PizzaSizes = _context.PizzaAttributes.Where(x => x.Name == "Size"),
@@ -44,6 +31,7 @@ namespace OrderPizza1.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "CanOrderPizza")]
         public void Save()
         {
 
