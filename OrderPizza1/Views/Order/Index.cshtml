@@ -8,12 +8,18 @@
 
 @using (Html.BeginForm("Save", "Order"))
 {
+    <div row class="col-lg-2">
+    </div>
+    <div row class="col-lg-10">
+        @Html.ValidationSummary(true, "Please fill the required fields")
+    </div>
     <div class="row form-group">
         <div class="col-lg-2">
             @Html.LabelFor(m => m.PizzaSizes, new { @class = "control-label" })
         </div>
         <div class="col-lg-20">
-            @Html.DropDownListFor(m => m.PizzaSizes, Model.PizzaSizes.Select(x => new SelectListItem { Text = x.Value, Value = x.Id.ToString() }), "Select Size", new { @class = "form-control" })
+            @Html.DropDownListFor(m => m.PizzaSizes, Model.PizzaSizes.Select(x => new SelectListItem { Text = x.Value, Value = x.Id.ToString() }), new { @class = "form-control" })
+            @*@Html.ValidationMessageFor(m => m.PizzaSizes)*@
         </div>
     </div>
     <div class="row form-group">
@@ -21,58 +27,63 @@
             @Html.LabelFor(m => m.PizzaCrusts, new { @class = "control-label" })
         </div>
         <div class="col-lg-20">
-            @Html.DropDownListFor(m => m.PizzaCrusts, Model.PizzaCrusts.Select(x => new SelectListItem { Text = x.Value, Value = x.Id.ToString() }), "Select Crust", new { @class = "form-control" })
+            @Html.DropDownListFor(m => m.PizzaCrusts, Model.PizzaCrusts.Select(x => new SelectListItem { Text = x.Value, Value = x.Id.ToString() }), new { @class = "form-control" })
+            @*@Html.ValidationMessageFor(m => m.PizzaCrusts)*@
         </div>
     </div>
-    <div class="row form-group">
-        <div class="col-lg-2">
-            @Html.LabelFor(m => m.PizzaToppings, new { @class = "control-label" })
+        <div class="row form-group">
+            <div class="col-lg-2">
+                @Html.LabelFor(m => m.PizzaToppings, new { @class = "control-label" })
+            </div>
+            <div class="checkbox">
+                @foreach (var topping in Model.PizzaToppings)
+                {
+                    <label>
+                        @Html.CheckBox(topping.Value) @topping.Value
+                    </label>
+                }
+            </div>
         </div>
-        <div class="checkbox">
-            @foreach (var topping in Model.PizzaToppings)
-            {
-                <label>
-                    @Html.CheckBox(topping.Value) @topping.Value
-                </label>
-            }
+        <div class="row form-group">
+            <div class="col-lg-2">
+                @Html.Label("Deliver To:", new { @class = "control-label" })
+            </div>
         </div>
-    </div>
-    <div class="row form-group">
-        <div class="col-lg-2">
-            @Html.Label("Deliver To:", new { @class = "control-label" })
+        <div class="row form-group">
+            <div class="col-lg-2">
+                @Html.LabelFor(x => x.Customer.Name, new { @class = "control-label" })
+            </div>
+            <div class="col-lg-20">
+                @Html.TextBoxFor(x => x.Customer.Name, new { @class = "form-control" })
+                @*@Html.ValidationMessageFor(x => x.Customer.Name)*@
+            </div>
         </div>
-    </div>
-    <div class="row form-group">
-        <div class="col-lg-2">
-            @Html.LabelFor(x => x.Customer.Name, new { @class = "control-label" })
+        <div class="row form-group">
+            <div class="col-lg-2">
+                @Html.LabelFor(x => x.Customer.Address, new { @class = "control-label" })
+            </div>
+            <div class="col-lg-20">
+                @Html.TextBoxFor(x => x.Customer.Address, new { @class = "form-control" })
+                @*@Html.ValidationMessageFor(x => x.Customer.Address)*@
+            </div>
         </div>
-        <div class="col-lg-20">
-            @Html.TextBoxFor(x => x.Customer.Name, new { @class = "form-control" })
+        <div class="row form-group">
+            <div class="col-lg-2">
+                @Html.LabelFor(x => x.Customer.Zip, new { @class = "control-label" })
+            </div>
+            <div class="col-lg-20">
+                @Html.TextBoxFor(x => x.Customer.Zip, new { @class = "form-control" })
+                @*@Html.ValidationMessageFor(x => x.Customer.Zip)*@
+            </div>
         </div>
-    </div>
-    <div class="row form-group">
-        <div class="col-lg-2">
-            @Html.LabelFor(x => x.Customer.Address, new { @class = "control-label" })
+        <div class="row form-group">
+            <div class="col-lg-2">
+                @Html.LabelFor(x => x.Customer.Phone, new { @class = "control-label" })
+            </div>
+            <div class="col-lg-20">
+                @Html.TextBoxFor(x => x.Customer.Phone, new { @class = "form-control" })
+                @*@Html.ValidationMessageFor(x => x.Customer.Phone)*@
+            </div>
         </div>
-        <div class="col-lg-20">
-            @Html.TextBoxFor(x => x.Customer.Address, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="row form-group">
-        <div class="col-lg-2">
-            @Html.LabelFor(x => x.Customer.Zip, new { @class = "control-label" })
-        </div>
-        <div class="col-lg-20">
-            @Html.TextBoxFor(x => x.Customer.Zip, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="row form-group">
-        <div class="col-lg-2">
-            @Html.LabelFor(x => x.Customer.Phone, new { @class = "control-label" })
-        </div>
-        <div class="col-lg-20">
-            @Html.TextBoxFor(x => x.Customer.Phone, new { @class = "form-control" })
-        </div>
-    </div>
-    <input type="submit" class="btn btn-primary" value="Submit" />
+        <input type="submit" class="btn btn-primary" value="Submit" />
 }

@@ -217,6 +217,10 @@
     <Compile Include="Migrations\201705151334545_seedRoleUserData.Designer.cs">
       <DependentUpon>201705151334545_seedRoleUserData.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705161150235_dataAnootationApplied.cs" />
+    <Compile Include="Migrations\201705161150235_dataAnootationApplied.Designer.cs">
+      <DependentUpon>201705161150235_dataAnootationApplied.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -317,6 +321,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705151334545_seedRoleUserData.resx">
       <DependentUpon>201705151334545_seedRoleUserData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705161150235_dataAnootationApplied.resx">
+      <DependentUpon>201705161150235_dataAnootationApplied.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

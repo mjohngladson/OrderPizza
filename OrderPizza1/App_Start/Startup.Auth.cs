@@ -56,7 +56,7 @@ namespace OrderPizza1
 
             app.UseFacebookAuthentication(
                appId: "117421922092991",
-               appSecret: "7e4bbeaae4f457351507ac686d1fc213");
+               appSecret: "b8f7226cdf4e4b0e389b5d91a6bc8076");
 
             //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             //{

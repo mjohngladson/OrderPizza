@@ -16,7 +16,8 @@ namespace OrderPizza1.Controllers
             _context = new ApplicationDbContext();
         }
 
-        [Authorize(Roles = "CanOrderPizza")]
+        [Authorize]
+        [HttpGet]
         // GET: Order
         public ActionResult Index()
         {
@@ -32,9 +33,16 @@ namespace OrderPizza1.Controllers
         }
 
         [Authorize(Roles = "CanOrderPizza")]
-        public void Save()
+        [HttpPost]
+        public ActionResult Save(PizzaPizzaAttributesViewModel model)
         {
-
+            if (ModelState.IsValid) return View();
+            model.PizzaSizes = _context.PizzaAttributes.Where(x => x.Name == "Size");
+            model.PizzaCrusts = _context.PizzaAttributes.Where(x => x.Name == "Crust");
+            model.PizzaToppings = _context.PizzaAttributes.Where(x => x.Name == "Topping");
+            //SelectedToppings = _context.PizzaAttributes.Where(x => x.Name == "Topping").Select(y => y.IsSelected),
+            //Customer = new Customer()
+            return View("Index", model);
         }
     }
 }
