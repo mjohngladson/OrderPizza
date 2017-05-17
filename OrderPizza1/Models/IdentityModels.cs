@@ -32,13 +32,13 @@ namespace OrderPizza1.Models
             modelBuilder.Entity<Customer>().Property(a => a.Address).IsRequired();
             modelBuilder.Entity<Customer>().Property(z => z.Zip).IsRequired();
             modelBuilder.Entity<Customer>().Property(p => p.Phone).IsRequired();
-            modelBuilder.Entity<Pizza>().Property(s => s.Size).IsRequired();
-            modelBuilder.Entity<Pizza>().Property(x => x.Crust).IsRequired();
         }
 
         public DbSet<Pizza> Pizzas { get; set; }
         public DbSet<PizzaAttribute> PizzaAttributes { get; set; }
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<Order> Orders { get; set; }
+
 
         public static ApplicationDbContext Create()
         {

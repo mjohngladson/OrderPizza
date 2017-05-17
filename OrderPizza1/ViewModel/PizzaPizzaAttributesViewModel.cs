@@ -11,12 +11,19 @@ namespace OrderPizza1.ViewModel
     public class PizzaPizzaAttributesViewModel
     {
         [Display(Name = "Size")]
-        public IEnumerable<PizzaAttribute> PizzaSizes { get; set; }
+        public int PizzaSize { get; set; }
+        public IEnumerable<SelectListItem> PizzaSizes { get; set; }
+
         [Display(Name = "Crust")]
-        public IEnumerable<PizzaAttribute> PizzaCrusts { get; set; }
+        public int PizzaCrust { get; set; }
+        public IEnumerable<SelectListItem> PizzaCrusts { get; set; }
+
         [Display(Name = "Topping")]
-        public IEnumerable<PizzaAttribute> PizzaToppings { get; set; }
-        public IEnumerable<bool> SelectedToppings { get; set; }
+        public IEnumerable<int> PizzaTopping { get; set; }
+        public IEnumerable<SelectListItem> PizzaToppings { get; set; }
+
+        public IEnumerable<int> SelectedTopping { get; set; }
+
         public Customer Customer { get; set; }
     }
 }

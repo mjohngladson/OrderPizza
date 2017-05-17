@@ -9,10 +9,8 @@ namespace OrderPizza1.Models
     public class Pizza
     {
         public int Id { get; set; }
-        [Required]
-        public string Size { get; set; }
-        [Required]
-        public string Crust { get; set; }
-        public string Toppings { get; set; }
+        public int Size { get; set; }
+        public int Crust { get; set; }
+        public string Topping { get; set; }
     }
 }
