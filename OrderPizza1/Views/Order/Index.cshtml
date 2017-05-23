@@ -40,12 +40,18 @@
                 @foreach (var topping in Model.PizzaToppings)
                 {
                     <li class="list-unstyled" style="margin-left: -40px">
-                        <input type="checkbox" name="PizzaTopping" value="@topping.Value" id="@topping.Value"
-                        @{if (Model.PizzaTopping.Count(x => x.ToString() == topping.Value) > 0)
-                            { <text> checked='checked' </text>      } } />
-                        <label for="@topping.Value" style="font-weight: lighter">@topping.Text</label>
+                        <input type="checkbox" name="PizzaTopping" value="@topping.Value" id="PizzaTopping"  
+                               @{
+                                   if (Model.PizzaTopping?.Count(x => x.ToString() == topping.Value) > 0)
+                                   {
+                                       W‌riteLiteral(@" ");/*​*/
+                                       W‌riteLiteral(@"checked='checked'");/*​*/
+                                       W‌riteLiteral(@" ");
+                                   }
+                               } />
+                        <label for="PizzaTopping" style="font-weight: lighter">@topping.Text</label>
                     </li>
-                            }
+    }
             </ul>
         </div>
     </div>
@@ -91,4 +97,4 @@
         </div>
     </div>
     <input type="submit" class="btn btn-primary" value="Submit" />
-                            }
+    }

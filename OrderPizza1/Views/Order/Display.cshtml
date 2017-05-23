@@ -1,0 +1,97 @@
+﻿@model List<OrderPizza1.ViewModel.OrderDisplayViewModel>
+
+@{
+    ViewBag.Title = "Placed Orders";
+}
+
+<h2>Placed Orders</h2>
+
+<table class="table table-bordered table-responsive table-striped">
+    <thead>
+    <th>
+        Name
+    </th>
+    <th>
+        Phone
+    </th>
+    <th>
+        Address
+    </th>
+    <th>
+        Zip
+    </th>
+    <th>
+        Size
+    </th>
+    <th>
+        Crust
+    </th>
+    <th>
+        Topping
+    </th>
+    <th>
+        Process
+    </th>
+    </thead>
+    <tbody>
+        @foreach (var viewModel in Model)
+        {
+            <tr>
+                <td>
+                    @viewModel.Order.Customer.Name
+                </td>
+                <td>
+                    @viewModel.Order.Customer.Phone
+                </td>
+                <td>
+                    @viewModel.Order.Customer.Address
+                </td>
+                <td>
+                    @viewModel.Order.Customer.Zip
+                </td>
+                <td>
+                    @viewModel.PizzaSize
+                </td>
+                <td>
+                    @viewModel.PizzaCrust
+                </td>
+                <td>
+                    @viewModel.PizzaTopping
+                </td>
+                <td>
+                    <button id="ProcessOrder" data-id="@viewModel.Order.Id" class="btn btn-primary">Process</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#ProcessOrder").click(function () {
+                //console.log('1');
+                //alert();
+                bootbox.confirm("Are you sure to process the order?",
+                    function(result) {
+                        if (result) {
+                            var data = $(this).data("id");
+                            $.ajax(
+                                {
+                                    type: "POST",
+                                    url: '@Url.Action("Process", "Order")',
+                                    data: data,
+                                    success: function() {
+                                        console.log("success");
+                                    },
+                                    error: function() {
+                                        console.log("error");
+                                    }
+                                });
+                        }
+                    });
+            });
+        });
+    </script>
+}

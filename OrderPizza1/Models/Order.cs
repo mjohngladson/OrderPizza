@@ -13,6 +13,7 @@ namespace OrderPizza1.Models
         public int CustomerId { get; set; }
         [ForeignKey("Pizza")]
         public int PizzaId { get; set; }
+        public bool Processed { get; set; } = false;
         public DateTime DateCreated { get; set; } = DateTime.UtcNow;
 
         //Navigation property

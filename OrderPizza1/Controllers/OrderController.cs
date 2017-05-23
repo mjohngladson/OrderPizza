@@ -31,7 +31,7 @@ namespace OrderPizza1.Controllers
             return View(model);
         }
 
-        [Authorize(Roles = "CanOrderPizza")]
+        [Authorize]
         [HttpPost]
         public ActionResult Save(PizzaPizzaAttributesViewModel model)
         {
@@ -53,7 +53,7 @@ namespace OrderPizza1.Controllers
                 {
                     Size = model.PizzaSize,
                     Crust = model.PizzaCrust,
-                    Topping = string.Join(",", model.PizzaTopping)
+                    Topping = model.PizzaTopping != null ? string.Join(",", model.PizzaTopping) : null
                 };
                 _context.Pizzas.Add(pizza);
                 _context.SaveChanges();
@@ -73,6 +73,53 @@ namespace OrderPizza1.Controllers
             model.PizzaCrusts = _context.PizzaAttributes.Where(x => x.Name == "Crust").Select(p => new SelectListItem { Text = p.Value, Value = p.Id.ToString() });
             model.PizzaToppings = _context.PizzaAttributes.Where(x => x.Name == "Topping").Select(p => new SelectListItem { Text = p.Value, Value = p.Id.ToString() });
             return View("Index", model);
+        }
+
+        [HttpGet]
+        public ActionResult Save()
+        {
+            return View();
+        }
+
+        [Authorize(Roles = "CanOrderPizza")]
+        [HttpGet]
+        public ActionResult Display()
+        {
+            var orders = new List<OrderDisplayViewModel>();
+            foreach (var o in _context.Orders.Where(o => o.Processed == false))
+            {
+                var viewModel = new OrderDisplayViewModel
+                {
+                    Order = new Order()
+                    {
+                        Customer = _context.Customers.FirstOrDefault(c => o.CustomerId == c.Id),
+                        Pizza = _context.Pizzas.FirstOrDefault(p => o.PizzaId == p.Id)
+                    }
+                };
+                viewModel.PizzaSize = _context.PizzaAttributes.First(pa => pa.Id == viewModel.Order.Pizza.Size).Value;
+                viewModel.PizzaCrust = _context.PizzaAttributes.First(pa => pa.Id == viewModel.Order.Pizza.Crust).Value;
+
+                if (viewModel.Order.Pizza.Topping != null)
+                {
+                    foreach (var topping in viewModel.Order.Pizza.Topping.Split(','))
+                    {
+                        viewModel.PizzaTopping += ", " + _context.PizzaAttributes.First(pa => pa.Id.ToString() == topping).Value;
+                    }
+                    viewModel.PizzaTopping = viewModel.PizzaTopping.Substring(2, viewModel.PizzaTopping.Length - 2);
+                }
+                orders.Add(viewModel);
+            }
+
+            return View(orders);
+        }
+
+        public ActionResult Process()
+        {
+            //var order = _context.Orders.FirstOrDefault(o => o.Id == id);
+            //if (order == null) return View("Display");
+            //order.Processed = true;
+            //_context.SaveChanges();
+            return View("Display");
         }
     }
 }

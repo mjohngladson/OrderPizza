@@ -249,6 +249,10 @@
     <Compile Include="Migrations\201705171418096_201705171410246_DataTypeChangedforPizzaTopping1.Designer.cs">
       <DependentUpon>201705171418096_201705171410246_DataTypeChangedforPizzaTopping1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705230836060_ordderEntityChanged.cs" />
+    <Compile Include="Migrations\201705230836060_ordderEntityChanged.Designer.cs">
+      <DependentUpon>201705230836060_ordderEntityChanged.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -266,9 +270,11 @@
     <Compile Include="UnitOfWork\IUnitOfWork.cs" />
     <Compile Include="UnitOfWork\UnitOfWork.cs" />
     <Compile Include="Utilities\Constants.cs" />
+    <Compile Include="ViewModel\OrderDisplayViewModel.cs" />
     <Compile Include="ViewModel\PizzaPizzaAttributesViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="404.html" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap1.css" />
@@ -277,6 +283,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\bootbox.js" />
+    <Content Include="Scripts\bootbox.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\bootstrap1.js" />
@@ -331,6 +339,8 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Order\Index.cshtml" />
+    <Content Include="Views\Order\Save.cshtml" />
+    <Content Include="Views\Order\Display.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -383,6 +393,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705171418096_201705171410246_DataTypeChangedforPizzaTopping1.resx">
       <DependentUpon>201705171418096_201705171410246_DataTypeChangedforPizzaTopping1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705230836060_ordderEntityChanged.resx">
+      <DependentUpon>201705230836060_ordderEntityChanged.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
