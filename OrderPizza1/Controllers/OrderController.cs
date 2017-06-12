@@ -85,6 +85,33 @@ namespace OrderPizza1.Controllers
         [HttpGet]
         public ActionResult Display()
         {
+            var orders = GetOrders().ToList();
+            return View(orders);
+        }
+
+        [Authorize(Roles = "CanOrderPizza")]
+        [HttpPost]
+        public bool Process(int id)
+        {
+            //List<OrderDisplayViewModel> orders;
+            var order = _context.Orders.FirstOrDefault(o => o.Id == id);
+            if (order == null)
+            {
+                //orders = GetOrders().ToList();
+                //return View("Display", orders);
+                return false;
+            }
+            order.Processed = true;
+            _context.SaveChanges();
+
+            //orders = GetOrders().ToList();
+            //return View("Display", orders);
+            return true;
+        }
+
+        [NonAction]
+        private IEnumerable<OrderDisplayViewModel> GetOrders()
+        {
             var orders = new List<OrderDisplayViewModel>();
             foreach (var o in _context.Orders.Where(o => o.Processed == false))
             {
@@ -92,6 +119,7 @@ namespace OrderPizza1.Controllers
                 {
                     Order = new Order()
                     {
+                        Id = o.Id,
                         Customer = _context.Customers.FirstOrDefault(c => o.CustomerId == c.Id),
                         Pizza = _context.Pizzas.FirstOrDefault(p => o.PizzaId == p.Id)
                     }
@@ -109,17 +137,7 @@ namespace OrderPizza1.Controllers
                 }
                 orders.Add(viewModel);
             }
-
-            return View(orders);
-        }
-
-        public ActionResult Process()
-        {
-            //var order = _context.Orders.FirstOrDefault(o => o.Id == id);
-            //if (order == null) return View("Display");
-            //order.Processed = true;
-            //_context.SaveChanges();
-            return View("Display");
+            return orders;
         }
     }
 }
