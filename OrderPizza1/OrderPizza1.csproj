@@ -253,6 +253,26 @@
     <Compile Include="Migrations\201705230836060_ordderEntityChanged.Designer.cs">
       <DependentUpon>201705230836060_ordderEntityChanged.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201707060811222_NewPropertiesAddedForOrderNPizzaAttributes.cs" />
+    <Compile Include="Migrations\201707060811222_NewPropertiesAddedForOrderNPizzaAttributes.Designer.cs">
+      <DependentUpon>201707060811222_NewPropertiesAddedForOrderNPizzaAttributes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201707060819181_201707060811222_NewPropertiesAddedForOrderNPizzaAttributes.cs" />
+    <Compile Include="Migrations\201707060819181_201707060811222_NewPropertiesAddedForOrderNPizzaAttributes.Designer.cs">
+      <DependentUpon>201707060819181_201707060811222_NewPropertiesAddedForOrderNPizzaAttributes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201707060820229_201705151326481_seedPizzaAttributes.cs" />
+    <Compile Include="Migrations\201707060820229_201705151326481_seedPizzaAttributes.Designer.cs">
+      <DependentUpon>201707060820229_201705151326481_seedPizzaAttributes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201707060902374_MadePizzaAttributeColumnsNonNullable.cs" />
+    <Compile Include="Migrations\201707060902374_MadePizzaAttributeColumnsNonNullable.Designer.cs">
+      <DependentUpon>201707060902374_MadePizzaAttributeColumnsNonNullable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201707060906598_201707060820229_201705151326481_seedPizzaAttributes.cs" />
+    <Compile Include="Migrations\201707060906598_201707060820229_201705151326481_seedPizzaAttributes.Designer.cs">
+      <DependentUpon>201707060906598_201707060820229_201705151326481_seedPizzaAttributes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -396,6 +416,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705230836060_ordderEntityChanged.resx">
       <DependentUpon>201705230836060_ordderEntityChanged.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707060811222_NewPropertiesAddedForOrderNPizzaAttributes.resx">
+      <DependentUpon>201707060811222_NewPropertiesAddedForOrderNPizzaAttributes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707060819181_201707060811222_NewPropertiesAddedForOrderNPizzaAttributes.resx">
+      <DependentUpon>201707060819181_201707060811222_NewPropertiesAddedForOrderNPizzaAttributes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707060820229_201705151326481_seedPizzaAttributes.resx">
+      <DependentUpon>201707060820229_201705151326481_seedPizzaAttributes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707060902374_MadePizzaAttributeColumnsNonNullable.resx">
+      <DependentUpon>201707060902374_MadePizzaAttributeColumnsNonNullable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707060906598_201707060820229_201705151326481_seedPizzaAttributes.resx">
+      <DependentUpon>201707060906598_201707060820229_201705151326481_seedPizzaAttributes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

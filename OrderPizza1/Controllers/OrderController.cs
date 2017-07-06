@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using OrderPizza1.Models;
 using OrderPizza1.ViewModel;
+using WebGrease.Css.Extensions;
 
 namespace OrderPizza1.Controllers
 {
@@ -23,10 +25,10 @@ namespace OrderPizza1.Controllers
         {
             var model = new PizzaPizzaAttributesViewModel
             {
-                PizzaSizes = _context.PizzaAttributes.Where(x => x.Name == "Size").Select(p => new SelectListItem { Text = p.Value, Value = p.Id.ToString() }),
-                PizzaCrusts = _context.PizzaAttributes.Where(x => x.Name == "Crust").Select(p => new SelectListItem { Text = p.Value, Value = p.Id.ToString() }),
-                PizzaToppings = _context.PizzaAttributes.Where(x => x.Name == "Topping").Select(p => new SelectListItem { Text = p.Value, Value = p.Id.ToString() }).ToList(),
-                PizzaTopping = _context.PizzaAttributes.Where(x => x.Name == "Topping" && x.IsSelected).Select(p => p.Id).ToList()
+                PizzaSizes = _context.PizzaAttributes.Where(x => x.Name == "Size").Select(p => new SelectListItem { Text = p.Value + @"(" + p.Size + @" inch - $" + p.Amount + @")", Value = p.Id.ToString() }),
+                PizzaCrusts = _context.PizzaAttributes.Where(x => x.Name == "Crust").Select(p => new SelectListItem { Text = p.Value + (Math.Abs(p.Amount) == 0 ? "" : @"(+ $" + p.Amount + @")"), Value = p.Id.ToString() }),
+                PizzaToppings = _context.PizzaAttributes.Where(x => x.Name == "Toppings").Select(p => new SelectListItem { Text = p.Value + @"(+ $" + p.Amount + @")", Value = p.Id.ToString() }),
+                PizzaTopping = _context.PizzaAttributes.Where(x => x.Name == "Toppings" && x.IsSelected).Select(p => p.Id).ToList()
             };
             return View(model);
         }
@@ -60,6 +62,10 @@ namespace OrderPizza1.Controllers
 
                 customer = _context.Customers.First(c => c.Phone == (customer.Phone ?? model.Customer.Phone));
                 pizza = _context.Pizzas.OrderByDescending(p => p.Id).First();
+
+                var amount = _context.PizzaAttributes.FirstOrDefault(pa => pa.Id == model.PizzaSize).Amount + _context.PizzaAttributes.FirstOrDefault(pa => pa.Id == model.PizzaCrust).Amount + model.PizzaTopping.Sum(topping => _context.PizzaAttributes.FirstOrDefault(pa => pa.Id == topping).Amount);
+
+
                 var order = new Order
                 {
                     CustomerId = customer.Id,
@@ -67,11 +73,67 @@ namespace OrderPizza1.Controllers
                 };
                 _context.Orders.Add(order);
                 _context.SaveChanges();
-                return View();
+                //return View();
+
+                var redirecturl = "";
+
+                //Mention URL to redirect content to paypal site
+                redirecturl += "https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=" +
+                               ConfigurationManager.AppSettings["paypalemail"];
+
+                //First name i assign static based on login details assign this value
+                redirecturl += "&first_name=" + model.Customer.Name;
+
+                //Product Name
+                redirecturl += "&item_name=Pizza";
+
+                //Product Name
+                redirecturl += "&amount=" + amount;
+
+                //Phone No
+                redirecturl += "&night_phone_a=" + model.Customer.Phone;
+
+                //Address 
+                redirecturl += "&address1=" + model.Customer.Address + ", " + model.Customer.Zip;
+
+                //Shipping charges if any
+                //redirecturl += "&shipping=0";
+
+                //Handling charges if any
+                //redirecturl += "&handling=0";
+
+                //Tax amount if any
+                //redirecturl += "&tax=0";
+
+                //Add quatity i added one only statically 
+                //redirecturl += "&quantity=1";
+
+                //Currency code 
+                redirecturl += "&currency=$" + "currency";
+
+                //Success return page url
+                redirecturl += "&return=" +
+                               ConfigurationManager.AppSettings["SuccessURL"];
+
+                //Failed return page url
+                redirecturl += "&cancel_return=" +
+                               ConfigurationManager.AppSettings["FailedURL"];
+
+                Response.Redirect(redirecturl);
             }
-            model.PizzaSizes = _context.PizzaAttributes.Where(x => x.Name == "Size").Select(p => new SelectListItem { Text = p.Value, Value = p.Id.ToString() });
-            model.PizzaCrusts = _context.PizzaAttributes.Where(x => x.Name == "Crust").Select(p => new SelectListItem { Text = p.Value, Value = p.Id.ToString() });
-            model.PizzaToppings = _context.PizzaAttributes.Where(x => x.Name == "Topping").Select(p => new SelectListItem { Text = p.Value, Value = p.Id.ToString() });
+            model.PizzaSizes = _context.PizzaAttributes.Where(x => x.Name == "Size").Select(p => new SelectListItem
+            {
+                Text = p.Value + @"(" + p.Size + @" inch - $" + p.Amount + @")",
+                Value = p.Id.ToString()
+            });
+            model.PizzaCrusts = _context.PizzaAttributes.Where(x => x.Name == "Crust").Select(p => new SelectListItem
+            {
+                Text = p.Value + (Math.Abs(p.Amount) == 0 ? "" : @"(+ $" + p.Amount + @")"),
+                Value = p.Id.ToString()
+            });
+            model.PizzaToppings = _context.PizzaAttributes.Where(x => x.Name == "Toppings")
+                .Select(p => new SelectListItem { Text = p.Value + @"(+ $" + p.Amount + @")", Value = p.Id.ToString() });
+
             return View("Index", model);
         }
 
