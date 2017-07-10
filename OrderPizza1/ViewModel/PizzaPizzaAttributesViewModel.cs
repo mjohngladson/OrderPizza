@@ -21,9 +21,12 @@ namespace OrderPizza1.ViewModel
         [Display(Name = "Topping")]
         public IEnumerable<int> PizzaTopping { get; set; }
         public IEnumerable<SelectListItem> PizzaToppings { get; set; }
-
         public IEnumerable<int> SelectedTopping { get; set; }
 
+        [Display(Name = "Payment Method")]
+        [Required]
+        public int? PaymentMethod { get; set; }
+        public IEnumerable<SelectListItem> PaymentMethods { get; set; }
         public Customer Customer { get; set; }
     }
 }

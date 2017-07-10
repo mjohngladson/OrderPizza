@@ -23,7 +23,7 @@ textarea {
     max-width: 280px;
 }
 .input-validation-error {
-    border: 1px solid red;
+    outline: 1px solid red;
 }
 .validation-summary-errors {
     color: red;

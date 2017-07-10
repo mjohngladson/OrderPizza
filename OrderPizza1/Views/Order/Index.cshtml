@@ -40,15 +40,8 @@
                 @foreach (var topping in Model.PizzaToppings)
                 {
                     <li class="list-unstyled" style="margin-left: -40px">
-                        <input type="checkbox" name="PizzaTopping" value="@topping.Value" id="PizzaTopping"  
-                               @{
-                                   if (Model.PizzaTopping?.Count(x => x.ToString() == topping.Value) > 0)
-                                   {
-                                       W‌riteLiteral(@" ");/*​*/
-                                       W‌riteLiteral(@"checked='checked'");/*​*/
-                                       W‌riteLiteral(@" ");
-                                   }
-                               } />
+                        <input type="checkbox" name="PizzaTopping" value="@topping.Value" id="PizzaTopping"
+                               @{ if (Model.PizzaTopping?.Count(x => x.ToString() == topping.Value) > 0) { W‌riteLiteral(@" ");/*​*/ W‌riteLiteral(@"checked='checked'");/*​*/ W‌riteLiteral(@" "); } } />
                         <label for="PizzaTopping" style="font-weight: lighter">@topping.Text</label>
                     </li>
     }
@@ -96,5 +89,27 @@
             @*@Html.ValidationMessageFor(x => x.Customer.Phone)*@
         </div>
     </div>
-    <input type="submit" class="btn btn-primary" value="Submit" />
+    <div class="row form-group">
+        <div class="col-lg-2">
+            @Html.Label("Payment:", new { @class = "control-label" })
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-lg-2">
+            @Html.LabelFor(x => x.PaymentMethod)
+        </div>
+        <div class="col-lg-10">
+            @Html.RadioButtonFor(m => m.PaymentMethod, 0, new { id = "PaymentMethod1" }) Cash
+            @Html.RadioButtonFor(m => m.PaymentMethod, 1, new { id = "PaymentMethod2" }) Credit Card
+            @*@foreach (var paymentMethod in Model.PaymentMethods)
+                {
+                    <li class="list-unstyled" style="margin-left: -40px">
+                        <input type="radio" name="PaymentMethod" value="@paymentMethod.Text" id="PaymentMethod"
+                        @{ if (Model.PaymentMethod.ToString() == paymentMethod.Value) { W‌riteLiteral(@" ");/*​*/ W‌riteLiteral(@"checked='checked'");/*​*/ W‌riteLiteral(@" "); } } />
+                        <label for="PaymentMethod" style="font-weight: lighter">@paymentMethod.Text</label>
+                    </li>
+                }*@
+        </div>
+    </div>
+    <input type="submit" class="btn btn-primary" value="Order" />
     }
