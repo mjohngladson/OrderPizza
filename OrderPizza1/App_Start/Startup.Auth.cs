@@ -34,7 +34,7 @@ namespace OrderPizza1
                         validateInterval: TimeSpan.FromMinutes(30),
                         regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager))
                 }
-            });            
+            });
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 
             // Enables the application to temporarily store user information when they are verifying the second factor in the two-factor authentication process.
@@ -58,11 +58,11 @@ namespace OrderPizza1
                appId: "117421922092991",
                appSecret: "b8f7226cdf4e4b0e389b5d91a6bc8076");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "1057662350187-ebjkldq64hqdg9eu4d0v9bovebb4cmu8.apps.googleusercontent.com",
+                ClientSecret = "gwlHo4YDMANsKRDlN61QFwZp"
+            });
         }
     }
 }

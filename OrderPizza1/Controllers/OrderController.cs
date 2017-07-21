@@ -64,12 +64,13 @@ namespace OrderPizza1.Controllers
                 customer = _context.Customers.First(c => c.Phone == (customer.Phone ?? model.Customer.Phone));
                 pizza = _context.Pizzas.OrderByDescending(p => p.Id).First();
 
-                var amount = _context.PizzaAttributes.FirstOrDefault(pa => pa.Id == model.PizzaSize).Amount + _context.PizzaAttributes.FirstOrDefault(pa => pa.Id == model.PizzaCrust).Amount + model.PizzaTopping?.Sum(topping => _context.PizzaAttributes.FirstOrDefault(pa => pa.Id == topping).Amount);
+                var amount = _context.PizzaAttributes.FirstOrDefault(pa => pa.Id == model.PizzaSize).Amount + _context.PizzaAttributes.FirstOrDefault(pa => pa.Id == model.PizzaCrust).Amount + (model.PizzaTopping != null ? model.PizzaTopping.Sum(topping => _context.PizzaAttributes.FirstOrDefault(pa => pa.Id == topping).Amount) : 0);
 
                 var order = new Order
                 {
                     CustomerId = customer.Id,
-                    PizzaId = pizza.Id
+                    PizzaId = pizza.Id,
+                    Amount = amount
                 };
                 _context.Orders.Add(order);
                 _context.SaveChanges();
@@ -89,8 +90,8 @@ namespace OrderPizza1.Controllers
                     //Product Name
                     redirecturl += "&item_name=Pizza";
 
-                    //Product Name
-                    redirecturl += "&amount=1" + amount;
+                    //Amount
+                    redirecturl += "&amount=1";// + amount;
 
                     //Phone No
                     redirecturl += "&night_phone_a=" + model.Customer.Phone;
@@ -149,6 +150,19 @@ namespace OrderPizza1.Controllers
         [HttpGet]
         public ActionResult Save()
         {
+            //var customer = _context.Customers.First(c => c.Phone == (customer.Phone ?? model.Customer.Phone));
+            //var pizza = _context.Pizzas.OrderByDescending(p => p.Id).First();
+
+            //var amount = _context.PizzaAttributes.FirstOrDefault(pa => pa.Id == model.PizzaSize).Amount + _context.PizzaAttributes.FirstOrDefault(pa => pa.Id == model.PizzaCrust).Amount + (model.PizzaTopping != null ? model.PizzaTopping.Sum(topping => _context.PizzaAttributes.FirstOrDefault(pa => pa.Id == topping).Amount) : 0);
+
+            //var order = new Order
+            //{
+            //    CustomerId = customer.Id,
+            //    PizzaId = pizza.Id,
+            //    Amount = amount
+            //};
+            //_context.Orders.Add(order);
+            //_context.SaveChanges();
             return View();
         }
 
@@ -164,19 +178,13 @@ namespace OrderPizza1.Controllers
         [HttpPost]
         public bool Process(int id)
         {
-            //List<OrderDisplayViewModel> orders;
             var order = _context.Orders.FirstOrDefault(o => o.Id == id);
             if (order == null)
             {
-                //orders = GetOrders().ToList();
-                //return View("Display", orders);
                 return false;
             }
             order.Processed = true;
             _context.SaveChanges();
-
-            //orders = GetOrders().ToList();
-            //return View("Display", orders);
             return true;
         }
 
@@ -188,7 +196,7 @@ namespace OrderPizza1.Controllers
             {
                 var viewModel = new OrderDisplayViewModel
                 {
-                    Order = new Order()
+                    Order = new Order
                     {
                         Id = o.Id,
                         Customer = _context.Customers.FirstOrDefault(c => o.CustomerId == c.Id),

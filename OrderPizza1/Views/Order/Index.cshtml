@@ -101,14 +101,6 @@
         <div class="col-lg-10">
             @Html.RadioButtonFor(m => m.PaymentMethod, 0, new { id = "PaymentMethod1" }) Cash
             @Html.RadioButtonFor(m => m.PaymentMethod, 1, new { id = "PaymentMethod2" }) Credit Card
-            @*@foreach (var paymentMethod in Model.PaymentMethods)
-                {
-                    <li class="list-unstyled" style="margin-left: -40px">
-                        <input type="radio" name="PaymentMethod" value="@paymentMethod.Text" id="PaymentMethod"
-                        @{ if (Model.PaymentMethod.ToString() == paymentMethod.Value) { W‌riteLiteral(@" ");/*​*/ W‌riteLiteral(@"checked='checked'");/*​*/ W‌riteLiteral(@" "); } } />
-                        <label for="PaymentMethod" style="font-weight: lighter">@paymentMethod.Text</label>
-                    </li>
-                }*@
         </div>
     </div>
     <input type="submit" class="btn btn-primary" value="Order" />
