@@ -61,19 +61,26 @@ namespace OrderPizza1.Controllers
                 _context.Pizzas.Add(pizza);
                 _context.SaveChanges();
 
-                customer = _context.Customers.First(c => c.Phone == (customer.Phone ?? model.Customer.Phone));
-                pizza = _context.Pizzas.OrderByDescending(p => p.Id).First();
+                model.PizzaTopping.ForEach(pt =>
+                {
+                    var pizzaTopping1 = new PizzaTopping { Pizza = _context.Pizzas.OrderByDescending(p => p.Id).First().Id, Topping = pt};
+                    _context.PizzaToppings.Add(pizzaTopping1);
+                });
+                _context.SaveChanges();
+
+                TempData["customer"] = _context.Customers.First(c => c.Phone == (customer.Phone ?? model.Customer.Phone));
+                //pizza = _context.Pizzas.OrderByDescending(p => p.Id).First();
 
                 var amount = _context.PizzaAttributes.FirstOrDefault(pa => pa.Id == model.PizzaSize).Amount + _context.PizzaAttributes.FirstOrDefault(pa => pa.Id == model.PizzaCrust).Amount + (model.PizzaTopping != null ? model.PizzaTopping.Sum(topping => _context.PizzaAttributes.FirstOrDefault(pa => pa.Id == topping).Amount) : 0);
-
-                var order = new Order
-                {
-                    CustomerId = customer.Id,
-                    PizzaId = pizza.Id,
-                    Amount = amount
-                };
-                _context.Orders.Add(order);
-                _context.SaveChanges();
+                TempData["amount"] = amount;
+                //var order = new Order
+                //{
+                //    CustomerId = customer.Id,
+                //    PizzaId = pizza.Id,
+                //    Amount = amount
+                //};
+                //_context.Orders.Add(order);
+                //_context.SaveChanges();
                 //return View();
 
                 if (model.PaymentMethod == 1)
@@ -126,7 +133,7 @@ namespace OrderPizza1.Controllers
                 }
                 else
                 {
-                    return View("Save", model);
+                    return RedirectToAction("Save");
                 }
             }
             model.PizzaSizes = _context.PizzaAttributes.Where(x => x.Name == "Size").Select(p => new SelectListItem
@@ -150,20 +157,33 @@ namespace OrderPizza1.Controllers
         [HttpGet]
         public ActionResult Save()
         {
-            //var customer = _context.Customers.First(c => c.Phone == (customer.Phone ?? model.Customer.Phone));
-            //var pizza = _context.Pizzas.OrderByDescending(p => p.Id).First();
+            var customer = TempData["customer"] as Customer;
+            var pizza = _context.Pizzas.OrderByDescending(p => p.Id).First();
 
-            //var amount = _context.PizzaAttributes.FirstOrDefault(pa => pa.Id == model.PizzaSize).Amount + _context.PizzaAttributes.FirstOrDefault(pa => pa.Id == model.PizzaCrust).Amount + (model.PizzaTopping != null ? model.PizzaTopping.Sum(topping => _context.PizzaAttributes.FirstOrDefault(pa => pa.Id == topping).Amount) : 0);
+            var amount = (double)TempData["amount"];
 
-            //var order = new Order
-            //{
-            //    CustomerId = customer.Id,
-            //    PizzaId = pizza.Id,
-            //    Amount = amount
-            //};
-            //_context.Orders.Add(order);
-            //_context.SaveChanges();
-            return View();
+            var order = new Order
+            {
+                CustomerId = customer.Id,
+                PizzaId = pizza.Id,
+                Amount = amount
+            };
+            _context.Orders.Add(order);
+            _context.SaveChanges();
+
+            var pizzaToppings = string.Empty;
+            foreach (var pizzaTopping in _context.PizzaToppings.Where(pt => pt.Pizza == pizza.Id))
+            {
+                pizzaToppings = string.Join(",", _context.PizzaAttributes.FirstOrDefault(pa => pa.Id == pizzaTopping.Topping).Value);
+            }
+            var orderDisplay = new OrderDisplayViewModel
+            {
+                Order = order,
+                PizzaSize = _context.PizzaAttributes.FirstOrDefault(pa=>pa.Id == pizza.Size).Value,
+                PizzaCrust = _context.PizzaAttributes.FirstOrDefault(pa => pa.Id == pizza.Crust).Value,
+                PizzaTopping = pizzaToppings
+            };
+            return View(orderDisplay);
         }
 
         [Authorize(Roles = "CanOrderPizza")]

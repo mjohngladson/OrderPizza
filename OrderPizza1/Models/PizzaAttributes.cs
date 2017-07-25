@@ -13,5 +13,8 @@ namespace OrderPizza1.Models
         public double Amount { get; set; }
         public int Size { get; set; }
         public bool IsSelected { get; set; }
+
+        //navigation properties
+        //public virtual ICollection<Pizza> Pizzas { get; set; }
     }
 }

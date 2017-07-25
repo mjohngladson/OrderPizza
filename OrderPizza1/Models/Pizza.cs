@@ -12,5 +12,8 @@ namespace OrderPizza1.Models
         public int Size { get; set; }
         public int Crust { get; set; }
         public string Topping { get; set; }
+
+        //navigation property
+        //public virtual ICollection<PizzaAttribute> PizzaAttributes { get; set; }
     }
 }

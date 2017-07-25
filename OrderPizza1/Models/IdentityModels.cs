@@ -32,6 +32,8 @@ namespace OrderPizza1.Models
             modelBuilder.Entity<Customer>().Property(a => a.Address).IsRequired();
             modelBuilder.Entity<Customer>().Property(z => z.Zip).IsRequired();
             modelBuilder.Entity<Customer>().Property(p => p.Phone).IsRequired();
+            //modelBuilder.Entity<Pizza>().HasMany(p => p.PizzaAttributes).WithMany(pa => pa.Pizzas)
+            //    .Map(m => m.ToTable("PizzaTopping"));
         }
 
         public DbSet<Pizza> Pizzas { get; set; }
@@ -39,6 +41,7 @@ namespace OrderPizza1.Models
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<PaymentMethod> PaymentMethods { get; set; }
+        public DbSet<PizzaTopping> PizzaToppings { get; set; }
 
 
         public static ApplicationDbContext Create()
