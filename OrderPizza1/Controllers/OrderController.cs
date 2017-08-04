@@ -63,7 +63,7 @@ namespace OrderPizza1.Controllers
 
                 model.PizzaTopping.ForEach(pt =>
                 {
-                    var pizzaTopping1 = new PizzaTopping { Pizza = _context.Pizzas.OrderByDescending(p => p.Id).First().Id, Topping = pt};
+                    var pizzaTopping1 = new PizzaTopping { Pizza = _context.Pizzas.OrderByDescending(p => p.Id).First().Id, Topping = pt };
                     _context.PizzaToppings.Add(pizzaTopping1);
                 });
                 _context.SaveChanges();
@@ -149,7 +149,7 @@ namespace OrderPizza1.Controllers
             model.PizzaToppings = _context.PizzaAttributes.Where(x => x.Name == "Toppings")
                 .Select(p => new SelectListItem { Text = p.Value + @"(+ $" + p.Amount + @")", Value = p.Id.ToString() });
             model.PaymentMethods =
-                _context.PaymentMethods.Select(pm => new SelectListItem {Text = pm.Name, Value = pm.Id.ToString()});
+                _context.PaymentMethods.Select(pm => new SelectListItem { Text = pm.Name, Value = pm.Id.ToString() });
 
             return View("Index", model);
         }
@@ -164,7 +164,8 @@ namespace OrderPizza1.Controllers
 
             var order = new Order
             {
-                CustomerId = customer.Id,
+                //CustomerId = customer.Id,
+                Customer = customer,
                 PizzaId = pizza.Id,
                 Amount = amount
             };
@@ -172,14 +173,16 @@ namespace OrderPizza1.Controllers
             _context.SaveChanges();
 
             var pizzaToppings = string.Empty;
-            foreach (var pizzaTopping in _context.PizzaToppings.Where(pt => pt.Pizza == pizza.Id))
-            {
-                pizzaToppings = string.Join(",", _context.PizzaAttributes.FirstOrDefault(pa => pa.Id == pizzaTopping.Topping).Value);
-            }
+
+            pizzaToppings += string.Join(",", _context.PizzaAttributes.Where(pa => _context.PizzaToppings.Where(pt => pt.Pizza == pizza.Id).Select(x => x.Topping).Contains(pa.Id)).Select(y => y.Value));
+            //foreach (var pizzaTopping in _context.PizzaToppings.Where(pt => pt.Pizza == pizza.Id))
+            //{
+            //    pizzaToppings += string.Join(",", _context.PizzaAttributes.FirstOrDefault(pa => pa.Id == pizzaTopping.Topping).Value);
+            //}
             var orderDisplay = new OrderDisplayViewModel
             {
                 Order = order,
-                PizzaSize = _context.PizzaAttributes.FirstOrDefault(pa=>pa.Id == pizza.Size).Value,
+                PizzaSize = _context.PizzaAttributes.FirstOrDefault(pa => pa.Id == pizza.Size).Value,
                 PizzaCrust = _context.PizzaAttributes.FirstOrDefault(pa => pa.Id == pizza.Crust).Value,
                 PizzaTopping = pizzaToppings
             };
