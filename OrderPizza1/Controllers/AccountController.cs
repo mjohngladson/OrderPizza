@@ -13,7 +13,6 @@ using OrderPizza1.Models;
 
 namespace OrderPizza1.Controllers
 {
-    [Authorize]
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
